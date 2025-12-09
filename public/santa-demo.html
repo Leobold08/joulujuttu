@@ -10,23 +10,18 @@
   <main>
     <h1>Esimerkki: taustaan animointi — Joulupukki lentävine pororekineen</h1>
     <p>Tämä sivu näyttää kuinka lisäät animoidun joulupukin ja porot taustalle.</p>
+    <p><button id="toggle-sleighs">Toggle flying Santa</button></p>
   </main>
 
-  <!-- Tässä ladataan SVG ja kloonataan se CSS:llä/JS:llä tarvittaessa.
-       Elementillä .bg-container on pointer-events: none, joten se ei estä klikkauksia -->
   <div class="bg-container" aria-hidden="true">
-    <!-- Tässä on kaksi esimerkkikloonia eri viiveillä (sopii taustaksi) -->
     <div class="sleigh s1">
-      <!-- Sisältö otettu assets/santa-sleigh.svg:stä inline, jotta CSS animaatiot toimivat helposti -->
       <svg viewBox="0 0 300 120" class="sleigh-svg" xmlns="http://www.w3.org/2000/svg" role="img">
         <g id="sleigh-group" fill="none" stroke="none" transform="scale(1)">
-          <!-- Tähtisumua / valoefekti helmiksi -->
           <g opacity="0.12">
             <circle cx="60" cy="20" r="12" fill="#fff" />
             <circle cx="90" cy="12" r="6" fill="#fff" />
           </g>
 
-          <!-- Porot (yksinkertaistettu siluetti) -->
           <g id="reindeer" transform="translate(10,30)" fill="#2b2b2b">
             <g class="reindeer re1" transform="translate(0,0)">
               <ellipse cx="18" cy="18" rx="10" ry="6" />
@@ -51,11 +46,9 @@
             </g>
           </g>
 
-          <!-- Rekinen ja Joulupukki -->
           <g id="sleigh" transform="translate(170,50)" fill="#b22222">
             <rect x="0" y="8" rx="6" ry="6" width="70" height="22" />
             <path d="M0 30 Q10 40 40 35 Q70 30 80 24" fill="#a01919" />
-            <!-- Joulupukki (yksinkertaistettu) -->
             <g transform="translate(18,-8)">
               <circle cx="18" cy="10" r="8" fill="#fff0d9" />
               <rect x="12" y="16" width="12" height="16" rx="3" fill="#b22222" />
@@ -63,7 +56,6 @@
             </g>
           </g>
 
-          <!-- Hämäryys/varjostus antamaan syvyyttä -->
           <g opacity="0.08" transform="translate(0,60)">
             <ellipse cx="150" cy="32" rx="120" ry="18" fill="#000" />
           </g>
@@ -71,15 +63,12 @@
       </svg>
     </div>
 
-    <div class="sleigh s2">
-      <!-- Voidaan käyttää samaa inline-SVG:tä (kopio), mutta eri viive/skalointi/paikka antaa elävyyttä -->
+    <div class="sleigh s2" aria-hidden="true">
       <svg viewBox="0 0 300 120" class="sleigh-svg" xmlns="http://www.w3.org/2000/svg" role="img">
         <use href="#sleigh-group" />
-        <!-- Huom: jos selaimessa ei ole mahdollista reusea näin helposti, voit duplikoida koko SVG:n -->
       </svg>
     </div>
 
-    <!-- Muutama staattinen tähti liukumaan hiljalleen -->
     <div class="starfield">
       <div class="star s-a" style="left:5%; top:18%;"></div>
       <div class="star s-b" style="left:28%; top:8%;"></div>
@@ -89,27 +78,23 @@
   </div>
 
   <script>
-    // Pieni skripti duplikoimaan SVG jos useuse ei ole tuettu — ei pakollinen, mutta auttaa
     (function(){
-      // jos <use href="#sleigh-group"> ei toimi, korvataan se duplikaatilla
       const uses = document.querySelectorAll('svg use');
       uses.forEach(u => {
         try {
-          // jos .instanceRoot ei ole saatavilla, saadaan exception joistain selaimista
           const id = u.getAttribute('href') || u.getAttribute('xlink:href');
           if (!id) return;
           const target = document.querySelector(id);
           if (!target) return;
           const parentSvg = u.closest('svg');
-          // luodaan klooni
           const clone = target.cloneNode(true);
           parentSvg.appendChild(clone);
           u.remove();
-        } catch(e) {
-          // ei kriittistä — jatketaan
-        }
+        } catch(e) {}
       });
     })();
   </script>
+
+  <script src="/js/santa-fly.js" defer></script>
 </body>
 </html>
