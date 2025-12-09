@@ -72,26 +72,6 @@ function showMessage() {
         overlay.remove();
     };
     
-    // Add animation keyframes
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes modalFadeIn {
-            from { 
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.8);
-            }
-            to { 
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-    `;
-    document.head.appendChild(style);
-    
     document.body.appendChild(overlay);
     document.body.appendChild(modal);
 }
@@ -140,26 +120,6 @@ function createSparkle(x, y) {
         animation: sparkleFloat 1s ease-out forwards;
     `;
     
-    // Add sparkle animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes sparkleFloat {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-50px) scale(0.5);
-            }
-        }
-    `;
-    
-    if (!document.querySelector('#sparkle-style')) {
-        style.id = 'sparkle-style';
-        document.head.appendChild(style);
-    }
-    
     document.body.appendChild(sparkle);
     
     setTimeout(() => {
@@ -181,22 +141,6 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, observerOptions);
-
-// Add fade in animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-`;
-document.head.appendChild(style);
 
 // Observe cards and gallery items
 document.addEventListener('DOMContentLoaded', () => {
