@@ -67,13 +67,26 @@ function showMessage() {
         animation: fadeIn 0.3s ease;
     `;
     
-    overlay.onclick = () => {
+    const closeModal = () => {
         modal.remove();
         overlay.remove();
+        document.removeEventListener('keydown', handleEscape);
     };
+    
+    const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    };
+    
+    overlay.onclick = closeModal;
+    document.addEventListener('keydown', handleEscape);
     
     document.body.appendChild(overlay);
     document.body.appendChild(modal);
+    
+    // Focus the close button for accessibility
+    modal.querySelector('button').focus();
 }
 
 // Handle form submission
