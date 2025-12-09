@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joulujuttu - Christmas Magic</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">🎄 Joulujuttu</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1 class="glowing-text">Welcome to Joulujuttu</h1>
+                <p class="subtitle">Experience the Magic of Christmas</p>
+                <button class="cta-button" onclick="showMessage()">Discover the Magic ✨</button>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About Our Christmas Story</h2>
+                <div class="cards">
+                    <div class="card">
+                        <div class="card-icon">🎅</div>
+                        <h3>Santa's Workshop</h3>
+                        <p>Discover the magic behind the scenes where toys come to life and dreams are made real.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🎁</div>
+                        <h3>Gift of Joy</h3>
+                        <p>Every present tells a story of love, care, and the spirit of giving that makes Christmas special.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">⭐</div>
+                        <h3>Christmas Spirit</h3>
+                        <p>Feel the warmth of the season, bringing together families and friends in celebration.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery">
+            <div class="container">
+                <h2>Christmas Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">🎄</div>
+                        <p>Christmas Tree</p>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">🔔</div>
+                        <p>Jingle Bells</p>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">🕯️</div>
+                        <p>Candlelight</p>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">⛄</div>
+                        <p>Snowman</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder="Your Christmas Wish..." rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Send Message 🎄</button>
+                </form>
+                <div id="form-message" class="form-message"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Joulujuttu - Spreading Christmas Joy</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">📘</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+                <a href="#" aria-label="Instagram">📷</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
