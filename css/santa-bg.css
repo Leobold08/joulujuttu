@@ -1,0 +1,138 @@
+/* Tausta- ja animaatiotiedosto: liitä tämä sivuillesi (esim. <link rel=\"stylesheet\" href=\"/css/santa-bg.css\">)
+   Tekstin selkeyden vuoksi kommentit suomeksi.
+*/
+
+:root{
+  --sleigh-duration: 22s;
+  --sleigh-duration-slow: 34s;
+  --sleigh-ease: linear;
+  --santa-opacity: 0.95;
+  --night-color: #071025;
+  --star-color: #fff;
+}
+
+html,body{
+  height:100%;
+  margin:0;
+  background: linear-gradient(180deg, #071025 0%, #0b2340 60%, #071025 100%);
+  color: #eee;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Sivun sisältö pitää näkyä päällä — tausta on fixed ja pointer-events: none */
+.bg-container{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none; /* tausta ei häiritse klikattavuutta */
+  overflow: hidden;
+}
+
+/* Aseta sisältö z-index:1 niin se on animaation päällä */
+main{
+  position: relative;
+  z-index: 2;
+  padding: 3rem;
+}
+
+/* Sleigh ja leveä liike oikealta vasemmalle */
+.sleigh{
+  position: absolute;
+  top: 12%;
+  right: -30%;
+  width: 380px;
+  height: auto;
+  opacity: var(--santa-opacity);
+  transform-origin: center;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 8px 10px rgba(0,0,0,0.6));
+}
+
+/* Eri klonien vaihtelevat koot ja viiveet antavat syvyyttä */
+.sleigh.s1{
+  animation: fly-1 var(--sleigh-duration) var(--sleigh-ease) infinite;
+  transform: translateX(0) scale(0.95);
+  top: 14%;
+  opacity: 0.95;
+}
+.sleigh.s2{
+  animation: fly-2 var(--sleigh-duration-slow) var(--sleigh-ease) infinite;
+  transform: translateX(0) scale(0.7);
+  top: 30%;
+  opacity: 0.75;
+  left: -10%;
+}
+
+/* SVG-koon rajoitukset */
+.sleigh-svg{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* Bob- ja lentoliikkeet: X ja Y sekä pieni rotaatio */
+@keyframes fly-1{
+  0%   { transform: translateX(110vw) translateY(0) rotate(-6deg) scale(0.95); opacity:0; }
+  6%   { opacity:1; }
+  25%  { transform: translateX(40vw) translateY(-6vh) rotate(-2deg) scale(0.98); }
+  50%  { transform: translateX(-10vw) translateY(-2vh) rotate(1.5deg) scale(0.95); }
+  75%  { transform: translateX(-45vw) translateY(3vh) rotate(4deg) scale(0.9); opacity:0.85; }
+  100% { transform: translateX(-120vw) translateY(0) rotate(6deg) scale(0.9); opacity:0; }
+}
+
+@keyframes fly-2{
+  0%   { transform: translateX(120vw) translateY(0) rotate(-4deg) scale(0.7); opacity:0; }
+  8%   { opacity:1; }
+  30%  { transform: translateX(50vw) translateY(-10vh) rotate(-1deg) scale(0.7); }
+  60%  { transform: translateX(0vw) translateY(-6vh) rotate(2deg) scale(0.68); }
+  85%  { transform: translateX(-60vw) translateY(2vh) rotate(5deg) scale(0.65); opacity:0.6; }
+  100% { transform: translateX(-140vw) translateY(0) rotate(6deg) scale(0.65); opacity:0; }
+}
+
+/* Yksittäiset porot saavat pienen siivenvärin/askel-animaation */
+.reindeer { transform-origin: center; }
+.reindeer.re1 { animation: re-bob 0.9s ease-in-out infinite; }
+.reindeer.re2 { animation: re-bob 1.05s ease-in-out infinite; }
+.reindeer.re3 { animation: re-bob 0.95s ease-in-out infinite; }
+
+@keyframes re-bob{
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(-1deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* Starfield */
+.starfield{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+}
+.star{
+  position:absolute;
+  width:4px;
+  height:4px;
+  background: var(--star-color);
+  border-radius:50%;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
+  opacity:0.9;
+  transform: translateZ(0);
+  animation: star-shimmer 6s linear infinite;
+}
+.star.s-a { animation-duration: 7s; opacity:0.85; }
+.star.s-b { animation-duration: 9s; opacity:0.65; width:3px; height:3px; }
+.star.s-c { animation-duration: 8s; opacity:0.95; }
+.star.s-d { animation-duration: 10s; opacity:0.7; transform: scale(0.9); }
+
+@keyframes star-shimmer{
+  0% { transform: translateY(0) translateX(0) scale(1); opacity:0.9; }
+  50% { transform: translateY(-6vh) translateX(-2vw) scale(1.2); opacity:1; }
+  100% { transform: translateY(0) translateX(0) scale(1); opacity:0.9; }
+}
+
+/* Pieni responsiivisuus: piilota isot elementit mobiilissa tai pienennä skaalaa */
+@media (max-width:600px){
+  .sleigh{ width:260px; }
+  .sleigh.s2{ display:none; } /* pienellä näytöllä yksi riittää */
+  .sleigh.s1{ top:8%; }
+}
